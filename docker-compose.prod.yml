@@ -8,6 +8,10 @@ services:
     ports:
       - 80:80
       - 443:443
+    volumes:
+      - type: bind
+        source: /root/.acme.sh/quori.rachidjeffali.com_ecc
+        target: /certs
 
   mysql:
     image: mysql:8.0
