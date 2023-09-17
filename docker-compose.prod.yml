@@ -12,6 +12,9 @@ services:
       - type: bind
         source: /root/.acme.sh/quori.rachidjeffali.com_ecc
         target: /certs
+      - type: bind
+        source: .
+        target: /app
     depends_on:
       - fpm
 
@@ -21,8 +24,6 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rachidj
-    ports:
-      - '3306:3306'
     volumes:
       - db:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -32,6 +33,8 @@ services:
       context: .
       dockerfile: Dockerfile.fpm
     volumes:
+      - type: volume
+        target: /app/vendor
       - type: bind
         target: /app
         source: .
@@ -39,8 +42,6 @@ services:
       - mysql
 
   node:
-    ports:
-      - '8080:8080'
     build: 
       context: .
       dockerfile: Dockerfile.encore.prod
@@ -53,4 +54,3 @@ services:
 
 volumes:
   db:
-  tls:
