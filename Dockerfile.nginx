@@ -1,0 +1,4 @@
+FROM nginx:latest
+WORKDIR /app
+COPY ./nginx/quori /etc/nginx/conf.d/default.conf
+COPY . .

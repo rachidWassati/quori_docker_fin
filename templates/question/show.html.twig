@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+   {{question.title}} 
+{% endblock title %}
+
+{% block body %}
+    <div class="block mb-20">
+        <div class="d-flex flex-row-nowrap align-items-center pb-30">
+            {% include 'partials/_rating.html.twig' with {from: 'question', id: question.id, rating: question.rating} %}
+            <h3 class="mr-5">{{question.title}}</h3>
+            <div class="question-tag">QUESTION</div>
+            <a href="{{path('user_profile', {id: question.author.id})}}" class="ml-auto">
+                <img src="{{asset(question.author.avatar)}}" alt="" class="avatar ">
+            </a>
+        </div>
+        <p class="question-text">{{question.content}}</p>
+   </div>
+
+   {% if form is defined %}
+        <div class="separator"></div>
+        <div class="block mb-20">
+            <h3 class="mb-20">Votre reponse :</h3>
+            {{form_start(form)}}
+                {{form_rest(form)}}
+                <button class="btn btn-primary">Repondre</button>
+            {{form_end(form)}}
+        </div>
+   {% endif %}
+
+   {% if question.comments | length %}
+        <div class="block mb-20">
+                <h3 class="mb-50">Reponses:</h3>
+                {% for comment in question.comments | sort((commentA, commentB) => commentB.createdAt <=> commentA.createdAt) %}
+                    <div class="question-response-elem pb-30">
+                        <div class="d-flex flex-row-nowrap align-items-center mb-20">
+                            {% include 'partials/_rating.html.twig' with {from: 'comment', id: comment.id, rating: comment.rating} %}
+                            <img src="{{asset(comment.author.avatar)}}" alt="" class="avatar mr-5">
+                            <a href="{{path('user_profile', {id: comment.author.id})}}" class="clickable">{{comment.author.fullname}}</a>
+                            <span class="ml-auto">{{comment.createdAt | ago(locale= 'fr')}}</span>
+                        </div>
+                        <p class="question-response-text">{{comment.content}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+   {% endif %}
+{% endblock body %}

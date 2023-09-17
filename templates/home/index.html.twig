@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quori{% endblock %}
+
+{% block body %}
+{#  #}
+    <ul>
+        {% for question in questions %}
+            <li class="block d-flex flex-column mb-20">
+                <div  class="flex-fill d-flex flex-row align-items-start">
+                    {% include 'partials/_rating.html.twig' with {from: 'question', id: question.id, rating: question.rating} %}
+                    <a href="{{path('question_show', {id: question.id})}}" class="mb-20 question-content pb-20">
+                        <h3 class="mb-20">{{question.title}}</h3>
+                        <p>{{question.content}}</p>
+                    </a>
+                </div>
+                <div class="d-flex flex-row justify-content-between">
+                    <a href="{{path('user_profile', {id: question.author.id})}}" class="d-flex flex-row align-items-center">
+                        <img class="avatar mr-20" src="{{asset('images/default_profile.png')}}" alt="" class="question-avatar mr-20">
+                        <small>demande par : <span class="clickable">{{question.author.fullname}}</span></small>
+                    </a>
+                    <div class="d-flex flex-row align-items-center">
+                        <i class="fas fa-comment mr-20"></i>
+                        <p>{{question.nbResponse}}</p>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

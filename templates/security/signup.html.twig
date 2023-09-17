@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+   Inscription a Quori 
+{% endblock title %}
+
+{% block body %}
+    <div class="block">
+        <h1 class="pb-30">Inscription</h1>
+        {{form_start(form)}}
+            {{form_rest(form)}}
+            <button class="btn btn-primary mr-5">S'inscrire</button>
+            <a href="{{path('signin')}}">Vous avez deja un compte ?</a>
+        {{form_end(form)}}
+   </div>
+{% endblock body %}

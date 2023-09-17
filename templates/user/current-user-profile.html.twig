@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{app.user.fullname}} | Profile{% endblock %}
+
+{% block body %}
+    <div class="block">
+        <h2 class="pb-30">Page de profil</h2>
+        {{form_start(form)}}
+            {{form_rest(form)}}
+            <button class="btn btn-primary">Sauvegarder</button>
+        {{form_end(form)}}
+    </div>
+
+{% endblock %}

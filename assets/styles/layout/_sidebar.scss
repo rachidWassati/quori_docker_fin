@@ -1,0 +1,29 @@
+/* SIDEBAR */
+
+@use '../mixins';
+
+.sidebar {
+    min-width: 200px;
+    margin-right: 50px;
+
+    @include mixins.xs {
+      margin-right: 0;
+      padding-top: 20px;
+      text-align: center;
+    }
+}
+  
+.sidebar-nav a {
+    display: block;
+    padding: 20px 0;
+    cursor: pointer;
+}
+  
+.sidebar-nav a:hover {
+    opacity: .8;
+    transition: opacity .4s;
+}
+  
+.sidebar-nav a i {
+    color: var(--color-dark);
+}

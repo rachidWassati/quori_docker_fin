@@ -1,0 +1,26 @@
+<div class="sidebar mr-50">
+    <a href="{{path('question_ask')}}" class="btn btn-primary">
+        <i class="fas fa-question"></i>
+        <span>Poser une question</span>
+    </a>
+    <ul class="sidebar-nav py-20">
+        <a href="{{path("home")}}">
+            <i class="fas fa-home mr-5"></i>
+            Liste des questions
+        </a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="{{path('user_show_questions')}}">
+                <i class="fas fa-pen mr-5"></i>
+                Mes questions
+            </a>
+            <a href="{{path('user_show_comments')}}">
+                <i class="fas fa-puzzle-piece mr-5"></i>
+                Mes reponse
+            </a>
+            <a href="{{path('signout')}}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Se deconnecter
+            </a>
+        {% endif %}
+    </ul>
+</div>

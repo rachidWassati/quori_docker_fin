@@ -1,0 +1,160 @@
+@use './mixins';
+
+/* Flex */
+.d-flex {
+    display: flex;
+}
+
+.flex-row-nowrap {
+    flex-flow: row nowrap;
+}
+
+.flex-row-wrap {
+    flex-flow: row wrap;
+}
+
+.flex-column {
+    flex-direction: column;
+
+    &-xs {
+      @include mixins.xs {
+        flex-direction: column;
+      }
+    }
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-items-end {
+    align-items: flex-end;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+.flex-fill {
+    flex: 1;
+}
+
+
+/* Margins */
+.m-5 {
+    margin: 5px;
+}
+
+.m-10 {
+    margin: 10px;
+}
+
+.m-20 {
+    margin: 20px;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.mr-50 {
+  margin-right: 50px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-50 {
+  margin-bottom: 50px;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+/* Paddings */
+.p-5 {
+    padding: 5px;
+}
+
+.p-10 {
+    padding: 10px;
+}
+
+.p-20 {
+    padding: 20px;
+}
+
+.pb-10 {
+  padding-bottom: 10px;
+}
+
+.pb-20 {
+  padding-bottom: 20px;
+}
+
+.pb-30 {
+  padding-bottom: 30px;
+}
+
+.py-50 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.py-20 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.flash {
+    padding: 20px;
+    text-align: center;
+    color: var(--primary-light);
+}
+  
+.flash-success {
+    background-color: var(--success);
+}
+  
+.flash-error {
+    background-color: var(--warning);
+}
+
+.xs-hide {
+  @include mixins.xs {
+    display: none;
+  }
+}
+
+.show-xs {
+  display: none;
+  @include mixins.xs {
+    display: inherit;
+  }
+}
+
+.hidden {
+  display: none;
+}

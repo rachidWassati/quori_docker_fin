@@ -1,0 +1,37 @@
+<header class="d-flex flex-row-nowrap justify-content-center p-20">
+    <div class="content flex-fill d-flex flex-row-nowrap align-items-center justify-content-between">
+        <a class="header-logo" href="{{path('home')}}">
+            <img src="{{asset('build/images/logo.png')}}" alt="Logo">
+        </a>
+        <div class="header-search p-10 flex-fill">
+            <i class="fas fa-search"></i>
+            <input type="text" name="" id="">
+        </div>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="d-flex align-items-center xs-hide">
+                <a href="{{path('user_current_profile')}}">
+                    <img src="{{asset(app.user.avatar)}}" alt="" class="avatar-lg mr-5">
+                </a>
+                <p>{{app.user.fullname}}</p>
+            </div>
+        {% else %}
+            <div class="xs-hide">
+                <a href="{{path('signup')}}" class="btn btn-primary mr-5">Inscription</a>
+                <a href="{{path('signin')}}" class="btn btn-primary-stroke">Connexion</a>
+            </div>
+        {% endif %}
+        <div class="show-xs burger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</header>
+
+<div class="menu-xs d-flex flex-column hidden">
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a href="{{path('user_current_profile')}}">Mon profil</a>
+    {% else %}
+        <a href="{{path('signup')}}" class="btn btn-primary mr-5">Inscription</a>
+        <a href="{{path('signin')}}" class="btn btn-primary-stroke">Connexion</a>
+    {% endif %}
+</div>

@@ -1,0 +1,56 @@
+@use './mixins';
+
+
+.app-content {
+    background-color: var(--gray-light);
+    padding: 20px;
+    @include mixins.xs {
+        padding: 10px;
+    }
+}
+  
+.content {
+    max-width: var(--max-width);
+
+    &-main {
+        padding: 50px 0;
+        @include mixins.xs {
+            padding: 0 0 50px 0;
+        }
+    }
+}
+
+.block {
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background-color: white;
+    box-shadow: var(--box-shadow);
+}
+
+.block-shadow:hover {
+    cursor: pointer;
+    box-shadow: none;
+    transition: all .4s;
+    transform: scale(1.02);
+}
+
+/* AVATAR */
+.avatar {
+    width: 45px;
+    border-radius: 50%;
+}
+
+.avatar-lg {
+    width: 60px;
+    border-radius: 50%;
+}
+
+.clickable {
+    color: var(--primary);
+    font-weight: var(--font-weight-semi-bold);
+    cursor: pointer;
+}
+
+.text-small {
+    font-size: var(--font-size-small);
+}

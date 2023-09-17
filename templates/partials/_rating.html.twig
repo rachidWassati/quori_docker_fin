@@ -1,0 +1,7 @@
+<div id="{{"rating_" ~ from ~ "_"  ~ id}}" hx-target="#{{"rating_" ~ from ~ "_" ~ id}}" hx-trigger="click" hx-swap="outerHTML" class="d-flex flex-column mr-20 align-items-center">
+    <i hx-get="{{path(from ~ '_rate', {id: id, score: 1})}}"  class="fa-regular fa-thumbs-up {{rating > 0 ? 'rating-up' : ''}}"></i>
+    <p class="text-small {{rating > 0 ? 'rating-up' : rating < 0 ? 'rating-dowm' : ''}}"> 
+        {{rating}}
+    </p>
+    <i hx-get="{{path(from ~ '_rate', {id: id, score: -1})}}" class="fa-regular fa-thumbs-down {{rating < 0 ? 'rating-down' : ''}}"></i>
+</div>
