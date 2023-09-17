@@ -12,6 +12,8 @@ services:
       - type: bind
         source: /root/.acme.sh/quori.rachidjeffali.com_ecc
         target: /certs
+    volumes_from:
+      - fpm
     depends_on:
       - fpm
 
