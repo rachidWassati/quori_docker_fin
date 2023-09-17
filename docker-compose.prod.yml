@@ -12,6 +12,8 @@ services:
       - type: bind
         source: /root/.acme.sh/quori.rachidjeffali.com_ecc
         target: /certs
+    depends_on:
+      - fpm
 
   mysql:
     image: mysql:8.0
@@ -24,6 +26,7 @@ services:
     volumes:
       - db:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      
   fpm:
     ports:
       - '8000:8000'
