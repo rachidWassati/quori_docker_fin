@@ -1,4 +1,12 @@
-<div id="{{"rating_" ~ from ~ "_"  ~ id}}" hx-target="#{{"rating_" ~ from ~ "_" ~ id}}" hx-trigger="click" hx-swap="outerHTML" class="d-flex flex-column mr-20 align-items-center">
+<script>
+    document.addEventListener("htmx:responseError", function(event) {
+      if (event.detail.xhr.status === 401) {
+        window.location.href = "{{ path('signin') }}";
+      }
+    });
+</script>
+
+<div id="{{"rating_" ~ from ~ "_"  ~ id}}" hx-target="#{{"rating_" ~ from ~ "_" ~ id}}" hx-trigger="click authNeeded" hx-swap="outerHTML" class="d-flex flex-column mr-20 align-items-center">
     <i hx-get="{{path(from ~ '_rate', {id: id, score: 1})}}"  class="fa-regular fa-thumbs-up {{rating > 0 ? 'rating-up' : ''}}"></i>
     <p class="text-small {{rating > 0 ? 'rating-up' : rating < 0 ? 'rating-dowm' : ''}}"> 
         {{rating}}

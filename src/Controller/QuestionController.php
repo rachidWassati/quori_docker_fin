@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 
 #[Route('/question', name: 'question_')]
 class QuestionController extends AbstractController
@@ -83,9 +84,13 @@ class QuestionController extends AbstractController
     }
 
     #[Route('/rate/{id}/{score}', name: 'rate')]
-    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    public function rate(Question $question, int $score, EntityManagerInterface $em, VoteRepository $voteRepository) : Response
+    public function rate(Security $security, Question $question, int $score, EntityManagerInterface $em, VoteRepository $voteRepository) : Response
     {
+
+        if(!$security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return new Response(null, Response::HTTP_UNAUTHORIZED);
+        }
+
         $user = $this->getUser();
 
         if($user !== $question->getAuthor()) {

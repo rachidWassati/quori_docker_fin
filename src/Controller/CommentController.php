@@ -7,6 +7,7 @@ use App\Entity\Vote;
 use App\Repository\VoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,8 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
     #[Route('/rate/{id}/{score}', name: 'rate')]
-    public function rate(Comment $comment, int $score, EntityManagerInterface $em, Request $request, VoteRepository $voteRepository) : Response
+    public function rate(Security $security, Comment $comment, int $score, EntityManagerInterface $em, Request $request, VoteRepository $voteRepository) : Response
     {
+        if(!$security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return new Response(null, Response::HTTP_UNAUTHORIZED);
+        }
+
         $user = $this->getUser();
 
         if($user !== $comment->getAuthor()) {
