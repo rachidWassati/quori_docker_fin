@@ -13,4 +13,6 @@ COPY ./composer.json .
 RUN composer install --no-dev --optimize-autoloader
 COPY . .
 RUN APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
+RUN sudo mkdir -p var/cache/prod/sessions && \
+    sudo chown -R www-data:www-data var/cache/prod/sessions
 # RUN usermod -u root www-data
